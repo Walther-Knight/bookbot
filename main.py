@@ -1,7 +1,10 @@
 def main():
     book_path = "books/frankenstein.txt"
     word_list = read_book(book_path)
-    word_count(word_list)
+    if word_list:
+        word_count(word_list)
+    else:
+        print("File Not Found, Cannot Count Words!")
 
     
 
@@ -19,15 +22,11 @@ def read_book(path_to_file):
             print(file_contents)
         return file_contents
     except:
-        print("File Not Found!")
+        return None
     
 #function to return word count
 def word_count(word_list):
-    try:
-        words = len(word_list.split())
-        print(f"Word Count: {words}")
-    except:
-        print("File Not Found, Cannot Count Words!")
+    print(f"Word Count: {len(word_list.split())}")
 
 if __name__ == "__main__":
     main()
