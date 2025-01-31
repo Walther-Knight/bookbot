@@ -3,9 +3,11 @@ def main():
     word_list = read_book(book_path)
     if word_list:
         word_count(word_list)
+        characters = character_count(word_list)
+        print(f"Number of Characters: {characters}")
     else:
-        print("File Not Found, Cannot Count Words!")
-
+        print("File Not Found!")
+    
     
 
 ''' main with input option
@@ -25,8 +27,20 @@ def read_book(path_to_file):
         return None
     
 #function to return word count
-def word_count(word_list):
-    print(f"Word Count: {len(word_list.split())}")
+def word_count(words):
+    print(f"Word Count: {len(words.split())}")
+
+#function to return character count
+def character_count(words):
+    num_char = {}
+    working_file = list(words.lower())
+    for i in working_file:
+        if i in num_char:
+            num_char[i] +=1
+        else:
+            num_char[i] = 1
+    return num_char
+    
 
 if __name__ == "__main__":
     main()
