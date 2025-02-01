@@ -2,7 +2,8 @@ def main():
     book_path = "books/frankenstein.txt"
     word_list = read_book(book_path)
     if word_list:
-        print(word_list)
+        #removed print to prevent whitespace error
+        #print(word_list)
         number_of_words = word_count(word_list)
         characters = character_count(word_list)
         character_report(characters, book_path, number_of_words)
@@ -43,14 +44,27 @@ def character_count(words):
             else:
                 num_char[i] = 1
     return num_char
-    
+
+# function for implied not explicit sorting order
+def sort_on(dict):
+    return dict["num"]
+
 # function to report on character counts, no special characters
 def character_report(characters, book_path, number_of_words):
     print(f"--- Begin report of {book_path} ---")
     print(f"{number_of_words} words found in the document")
     print("")
-    for character in characters:
-        print(f"The '{character}' character was found {characters[character]} times")
+
+# convert dictionary to a list of dictionaries
+    char_list = []
+    for char, num in characters.items():
+        char_list.append({"char": char, "num": num})
+
+# sort the list
+    char_list.sort(reverse=True, key=sort_on)
+
+    for char in char_list:
+        print(f"The '{char['char']}' character was found {char['num']} times")
     print("--- End Report ---")
 
 
