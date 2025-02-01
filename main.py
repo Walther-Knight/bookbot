@@ -1,10 +1,12 @@
 def main():
-    book_path = "books/frankenstein.txt"
+    book_path = "books/test.txt"
     word_list = read_book(book_path)
     if word_list:
+        print(word_list)
         word_count(word_list)
         characters = character_count(word_list)
         print(f"Number of Characters: {characters}")
+        print(character_report(characters))
     else:
         print("File Not Found!")
     
@@ -20,9 +22,7 @@ def main():
 def read_book(path_to_file):
     try:
         with open(path_to_file, "r") as f:
-            file_contents = f.read()
-            print(file_contents)
-        return file_contents
+            return f.read()
     except:
         return None
     
@@ -41,6 +41,21 @@ def character_count(words):
             num_char[i] = 1
     return num_char
     
+# function to report on character counts, no special characters
+def character_report(characters):
+    # define allowed characters for report
+    allowed_character = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",]
+    character_dict = {}
+    for character in characters:
+        if character in allowed_character:
+            if character in character_dict:
+                character_dict[character] += 1
+            else:
+                character_dict[character] = 1
+        elif character not in allowed_character:
+            pass
+    return character_dict
+
 
 if __name__ == "__main__":
     main()
