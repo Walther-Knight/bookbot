@@ -1,5 +1,11 @@
+from stats import word_count
+import sys
+
 def main():
-    book_path = "books/frankenstein.txt"
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    book_path = sys.argv[1]
     word_list = read_book(book_path)
     if word_list:
         #removed print to prevent whitespace error
@@ -26,10 +32,6 @@ def read_book(path_to_file):
             return f.read()
     except:
         return None
-    
-#function to return word count
-def word_count(words):
-    return len(words.split())
 
 #function to return character count
 def character_count(words):
@@ -64,7 +66,7 @@ def character_report(characters, book_path, number_of_words):
     char_list.sort(reverse=True, key=sort_on)
 
     for char in char_list:
-        print(f"The '{char['char']}' character was found {char['num']} times")
+        print(f"{char['char']}: {char['num']}")
     print("--- End Report ---")
 
 
